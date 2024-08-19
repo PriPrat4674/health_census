@@ -6,7 +6,7 @@ const patients = [];
 
 function addPatient(){
 	const name = document.getElementById("name").value;
-	const gender = document.querySelector("input[name="gender"]:checked");
+	const gender = document.querySelector('input[name="gender"]:checked');
 	const age = document.getElementById("age").value;
 	const condition = document.getElementById("condition").value;
 
@@ -19,7 +19,7 @@ function addPatient(){
 
 function resetForm(){
 	document.getElementById("name").value="";
-	document.querySelector("input[name="gender"]:checked").checked = false;
+	document.querySelector('input[name="gender"]:checked').checked = false;
 	document.getElementById("age").value = "";
 	document.getElementById("condition").value = "";
 }
@@ -68,8 +68,8 @@ function searchCondition(){
 
 	fetch('health_analysis.json')
 		.then(response=>response.json())
-		.thne(data=>{
-			const condition = data.condition.find(item=>item.name.toLowerCase() === input);
+		.then(data=>{
+			const condition = data.conditions.find(item=>item.name.toLowerCase() === input);
 
 			if(condition){
 				const symptoms = condition.symptoms.join(', ');
@@ -77,11 +77,11 @@ function searchCondition(){
 				const treatment = condition.treatment;
 
 				resultDiv.innerHTML += `<h2>${condition.name}</h2>`;
-				resultDiv.innerHTML += `<img src="${condition.imagesrc}" alt="jhj"`;
+				resultDiv.innerHTML += `<img src="${condition.imagesrc}" alt="jhj">`;
 
-				resultDiv.innerHTML += `<p><strong>Symptoms:</strong></p>`;
-				resultDiv.innerHTML += `<p><strong>Prevention:</strong></p>`;
-				resultDiv.innerHTML += `<p><strong>Treatment:</strong></p>`;
+				resultDiv.innerHTML += `<p><strong>Symptoms:</strong>${symptoms}</p>`;
+				resultDiv.innerHTML += `<p><strong>Prevention:</strong>${prevention}</p>`;
+				resultDiv.innerHTML += `<p><strong>Treatment:</strong>${treatment}</p>`;
 			}else{
 				resultDiv.innerHTML = 'Condition not found.';
 			}
